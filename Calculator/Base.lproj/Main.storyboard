@@ -59,6 +59,9 @@
                                 <state key="normal" title="+ / -">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="MinusNumbers:" destination="BYZ-38-t0r" eventType="touchUpInside" id="UOm-3D-GkZ"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mMF-qw-UM4">
                                 <rect key="frame" x="159" y="161.5" width="78" height="81"/>
@@ -70,6 +73,9 @@
                                 <state key="normal" title="%">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="PercentPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="y4a-eE-KYz"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7op-Tb-95A">
                                 <rect key="frame" x="238" y="161.5" width="81" height="81"/>

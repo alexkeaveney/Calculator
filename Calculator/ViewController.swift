@@ -22,6 +22,8 @@ class ViewController: UIViewController {
     var firstNumber: String!
     var secondNumber: String!
     
+    var maxDigits = 7
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -118,6 +120,20 @@ class ViewController: UIViewController {
         
     }
     
+    @IBAction func PercentPressed(_ sender: Any) {
+        var number = Float(CalcDisplay.text!)!
+        number = number/100
+        CalcDisplay.text = String(number)
+    }
+    
+    @IBAction func MinusNumbers(_ sender: Any) {
+        
+        var textNumber = String(CalcDisplay.text!)
+        textNumber = "-" + textNumber!
+        CalcDisplay.text = textNumber!
+        
+    }
+    
     func AddNumberToInput(number: String) {
         var textNumber = String(CalcDisplay.text!)
         
@@ -125,9 +141,16 @@ class ViewController: UIViewController {
             textNumber = number
         }
         else {
-           textNumber = textNumber! + number
+            if (textNumber?.characters.count)! <= maxDigits {
+                textNumber = textNumber! + number
+            }
+           
         }
         CalcDisplay.text = textNumber!
+    }
+    
+    func AddDotToInput() {
+        CalcDisplay.text = "\(CalcDisplay.text!)."
     }
     
     @IBAction func pressed0(_ sender: Any) {
@@ -172,7 +195,7 @@ class ViewController: UIViewController {
     
     @IBAction func PressedPoint(_ sender: Any) {
         
-        AddNumberToInput(number: ".")
+        AddDotToInput()
         
     }
     
