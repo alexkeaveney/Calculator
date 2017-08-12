@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  CalcViewController.swift
 //  Calculator
 //
 //  Created by admin on 07/08/2017.
@@ -23,7 +23,6 @@ class CalcViewController: UIViewController {
     var Symbol: Symbols!        /* holds the current operation*/
     var firstNumber: String!    /* holds the first number in the calculation */
     var secondNumber: String!   /* holds the second number in the calculation */
-    var maxDigits = 7           /* limit for the number of digits allowed on screen */
     @IBOutlet weak var CalcDisplay: UILabel! /* label to hold calculator display */
     
     /* This function clears the display */
@@ -92,19 +91,49 @@ class CalcViewController: UIViewController {
             if let symbol = Symbol {
                 switch symbol {
                     case .Divide:
+
+                        //divides the first number by the second
+                        var answer = String(fNumber/sNumber)
+                        
+                        //puts answer into check dot zero function to remove .0 if present
+                        answer = CheckDotZero(number: answer)
+                        
                         // Sets the display to the divided result
-                        CalcDisplay.text = String(fNumber/sNumber)
+                        CalcDisplay.text = answer
+                    
                     case .Multiply:
-                        // Sets the display to the multiplied result
-                        CalcDisplay.text = String(fNumber*sNumber)
+                        
+                        // Stores the multiplied result
+                        var answer = String(fNumber*sNumber)
+                        
+                        //puts answer into check dot zero function to remove .0 if present
+                        answer = CheckDotZero(number: answer)
+                        
+                        //Sets the display to the multiplied result
+                        CalcDisplay.text = answer
+                    
                     case .Plus:
+
+                        //stores the added result
+                        var answer = String(fNumber+sNumber)
+                        
+                        //puts answer into check dot zero function to remove .0 if present
+                        answer = CheckDotZero(number: answer)
+                        
                         // Sets the display to the added result
-                        CalcDisplay.text = String(fNumber+sNumber)
+                        CalcDisplay.text = answer
+                    
                     case .Minus:
-                        // Sets the display to the subtracted result
-                        CalcDisplay.text = String(fNumber-sNumber)
-                    default:
-                        print("No symbol")
+                        
+                        // Stores the subtracted result
+                        var answer = String(fNumber-sNumber)
+                        
+                        //puts answer into check dot zero function to remove .0 if present
+                        answer = CheckDotZero(number: answer)
+                        
+                        //Sets the display to the subtracted result
+                        CalcDisplay.text = answer
+
                 }
             }
             
@@ -114,6 +143,27 @@ class CalcViewController: UIViewController {
         }
     }
     
+    /* This function removes .0 on floats */
+    func CheckDotZero(number: String) -> String {
+        
+        //gets the last two characters of the number string
+        let last2 = number.substring(from:number.index(number.endIndex, offsetBy: -2))
+        
+        //checks if the last two digits are = .0
+        if last2 == ".0" {
+            
+            //drops the last two digits of the number string ".0"
+            let newNumber = String(number.characters.dropLast(2))
+            
+            //returns the number string
+            return newNumber
+        }
+        
+        //returns the original number string
+        return number
+    }
+    
+    /* This function is called on to use the multiply operator */
     @IBAction func MinusPressed(_ sender: Any) {
         
         //records the first number in the calculation
@@ -154,22 +204,37 @@ class CalcViewController: UIViewController {
         
     }
     
+    /* This function adds numbers to the display */
     func AddNumberToInput(number: String) {
+        
+        //Gets the current display
         var textNumber = String(CalcDisplay.text!)
         
+        //if its equal to 0 (default)
         if textNumber == "0" {
+            //replace the 0 with the entered number
             textNumber = number
         }
         else {
-            if (textNumber?.characters.count)! <= maxDigits {
-                textNumber = textNumber! + number
-            }
-           
+            
+            //make the text smaller
+            ShrinkText()
+            
+            //add the new number to the display
+            textNumber = textNumber! + number
+            
         }
+        
+        //add the text number to the display
         CalcDisplay.text = textNumber!
     }
     
-    /* The next eleven functions are used to add number 0-9 and decimal point to the display */
+    func ShrinkText() {
+        CalcDisplay.adjustsFontSizeToFitWidth = true
+        CalcDisplay.minimumScaleFactor = 0.5
+    }
+    
+    /* The next eleven functions are used to add number 0-9 and decimal point to the display  */
     
     @IBAction func pressed0(_ sender: Any) {
         AddNumberToInput(number: "0")
