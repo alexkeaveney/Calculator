@@ -1,6 +1,8 @@
 # Calculator
 A clone of the ios calculator app
 
+![alt tag](https://github.com/alexkeaveney/Calculator/blob/master/Screenshot.PNG)
+
 ## Getting Started
 
 This project requires Xcode IDE to build and run the project
